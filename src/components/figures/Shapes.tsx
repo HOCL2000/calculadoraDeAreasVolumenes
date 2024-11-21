@@ -103,8 +103,6 @@ export default function MetallicShapes3D() {
   const [position, setPosition] = useState<[number, number, number]>([1, 1, 1])
   const size = 2
   const [inputPosition, setInputPosition] = useState<string>("1,1,1")
-
-
   const handlePositionChange = () => {
     const coords = inputPosition.split(',').map(Number)
     const rangeValidation = coords.every(coord => coord >= -10 && coord <= 10)
@@ -150,7 +148,6 @@ export default function MetallicShapes3D() {
                 </button>
               </div>
             </div>
-
           </div>
         </div>
       </div>

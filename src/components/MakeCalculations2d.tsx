@@ -8,13 +8,12 @@ import {motion} from 'framer-motion'
 import { AreaCalculations } from "@/maths/AreaCalculations";
 
 const MakeCalculations2d = () => {
+    const shape = UseCalculatorStore(state=> state.figureSelected)
     const [size,setSize] = useState<number >(0)
     const [altura,setAltura] = useState<number >(0)
-    const shape = UseCalculatorStore(state=> state.figureSelected)
     const [explanation,setExplanation] = useState<string> ()
-    console.log(explanation);
-    
     const prompt = "hola, genera la explicación detallada de cómo se calcula el area de un {figura} por medio de integrales"
+
     async function calculateAreaOfCube(event: React.FormEvent<HTMLFormElement>){
         event.preventDefault()
         const valuesFromForm = Object.fromEntries(new FormData(event.currentTarget))
@@ -22,15 +21,15 @@ const MakeCalculations2d = () => {
         let finalPrompt = ``
         if (shape?.name) {
             if(shape.name == 'Círculo'){
-                const lado = Number(valuesFromForm.lado);
-                finalOptions = ` La longitud del radio es ${lado}`
-                setSize(lado)
+                const radio = Number(valuesFromForm.lado);
+                finalOptions = ` La longitud del radio es ${radio}`
+                setSize(radio)
             }else if(shape.name == 'Triángulo'){
-                const lado = Number(valuesFromForm.lado);
+                const base = Number(valuesFromForm.lado);
                 const altura = Number(valuesFromForm.altura);
-                setSize(lado)
+                setSize(base)
                 setAltura(altura)
-                finalOptions = `La altura es ${altura} y la base es ${lado}`
+                finalOptions = `La altura es ${altura} y la base es ${base}`
             }else if(shape.name == "Rombo"){
                 const altura = Number(valuesFromForm.altura);
                 const lado = Number(valuesFromForm.lado);
@@ -46,6 +45,8 @@ const MakeCalculations2d = () => {
             }
             finalPrompt = prompt.replace("{figura}", shape?.name).concat(finalOptions)
             const request = await chatSession.sendMessage(finalPrompt)
+            console.log(request);
+            
             const responseJson = JSON.parse(request.response.text());
             setExplanation(responseJson.explicacion);
         }
@@ -60,7 +61,7 @@ const MakeCalculations2d = () => {
     },[shape])
     
     return (
-    <section ref={contentRef} className="max-h-screen h-full w-full flex flex-col items-start overflow-y-scroll overflow-auto border rounded px-4 gap-4 " > 
+    <section ref={contentRef} className="max-h-screen h-full w-full flex flex-col items-start overflow-y-scroll overflow-auto border rounded px-4 gap-4" > 
         {shape ?
         <>
         <div className="w-full flex items-center justify-center">

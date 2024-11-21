@@ -38,6 +38,7 @@ const MakeCalculations3d = () => {
             finalPrompt = prompt.replace("{figura}", shape?.name).concat(finalOptions)
             const request = await chatSession.sendMessage(finalPrompt)
             const responseJson = JSON.parse(request.response.text());
+            
             setExplanation(responseJson.explicacion);
         }
     }  

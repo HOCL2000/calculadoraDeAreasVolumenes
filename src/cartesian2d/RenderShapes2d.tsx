@@ -88,12 +88,10 @@ export const RenderShape2d = ({ width, height }: { width: number, height: number
         { const radius = 50; 
         const sides = 5; 
         const angle = (2 * Math.PI) / sides; 
-
         const pentagonPoints = Array.from({ length: sides }, (_, i) => [
           centerX + radius * Math.cos(angle * i - Math.PI / 2),
           centerY + radius * Math.sin(angle * i - Math.PI / 2),
         ]).flat();
-
 
         return (
           <Line
