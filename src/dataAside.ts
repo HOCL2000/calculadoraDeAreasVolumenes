@@ -48,7 +48,7 @@ export const data2d: Figure[] = [
     },
     {
         "id": "8",
-        "name": "Pentágono",
+        "name": "Hexágono",
         "image": "/src/assets/images/pentagono.webp",
         "description": "Calcula el área de un pentágono regular multiplicando el perímetro por la apotema y dividiendo entre dos. Fórmula: área = (perímetro * apotema) / 2."
     }  

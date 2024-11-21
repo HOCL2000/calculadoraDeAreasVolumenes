@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import { Canvas, extend, useThree } from '@react-three/fiber'
-import { OrbitControls, Text, Environment } from '@react-three/drei'
+import { OrbitControls, Text, Environment, Cylinder, Sphere } from '@react-three/drei'
 import * as THREE from 'three'
 import { UseCalculatorStore } from '@/store/calculadora'
 import { toast } from 'sonner'
@@ -38,6 +38,39 @@ function AxisLabels() {
   return <>{labels}</>
 }
 
+function CapsuleGeometry({ size }: { size: number }) {
+  const radius = size / 4
+  const height = size / 2
+
+  return (
+    <group>
+      <Cylinder args={[radius, radius, height, 32]}>
+        <meshStandardMaterial         
+        color="#888888"
+        metalness={0.9}
+        roughness={0.1}
+        envMapIntensity={1} />
+      </Cylinder>
+      <Sphere args={[radius, 32, 32]} position={[0, height / 2, 0]}>
+        <meshStandardMaterial
+        color="#888888"
+        metalness={0.9}
+        roughness={0.1}
+        envMapIntensity={1} 
+        />
+      </Sphere>
+      <Sphere args={[radius, 32, 32]} position={[0, -height / 2, 0]}>
+        <meshStandardMaterial
+        color="#888888"
+        metalness={0.9}
+        roughness={0.1}
+        envMapIntensity={1} 
+        />
+      </Sphere>
+    </group>
+  )
+}
+
 interface ShapeProps {
   position: [number, number, number]
   size: number
@@ -59,6 +92,13 @@ function Shape({ position, size, shapeType }: ShapeProps) {
       break
     case 'Pirámide':
       geometry = <coneGeometry args={[size / 2, size, 4]} />
+      break
+    case 'Cápsula':
+      return (
+        <mesh ref={mesh} position={position}>
+          <CapsuleGeometry size={size} />
+        </mesh>
+      )
       break
     default:
       geometry = <boxGeometry args={[size, size, size]} />

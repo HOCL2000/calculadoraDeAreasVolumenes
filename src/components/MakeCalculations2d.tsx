@@ -36,7 +36,7 @@ const MakeCalculations2d = () => {
                 setSize(lado)
                 setAltura(altura)
                 finalOptions = ` La diagonal 1 ${altura} y la diagonal 2 es ${lado} `
-            }else if(shape.name == "Pentágono"){
+            }else if(shape.name == "Hexágono"){
                 const altura = Number(valuesFromForm.altura);
                 const lado = Number(valuesFromForm.lado);
                 setSize(lado)
@@ -96,7 +96,7 @@ const MakeCalculations2d = () => {
                 </label>
                 </div>
                 }
-                {shape.name === "Pentágono" &&
+                {shape.name === "Hexágono" &&
                 <div 
                 className="w-full flex flex-col gap-2">
                 <label htmlFor="altura" className="w-full">

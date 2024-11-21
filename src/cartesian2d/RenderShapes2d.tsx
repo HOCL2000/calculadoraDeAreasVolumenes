@@ -84,9 +84,9 @@ export const RenderShape2d = ({ width, height }: { width: number, height: number
             strokeWidth={2}
           />
         );
-        case "Pentágono":
+        case "Hexágono":
         { const radius = 50; 
-        const sides = 5; 
+        const sides = 6; 
         const angle = (2 * Math.PI) / sides; 
         const pentagonPoints = Array.from({ length: sides }, (_, i) => [
           centerX + radius * Math.cos(angle * i - Math.PI / 2),

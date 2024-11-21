@@ -26,19 +26,23 @@ const MakeCalculations3d = () => {
             }else if(shape.name == 'Esfera'){
                 const radio = Number(valuesFromForm.radio);
                 setVolume(radio)
-
                 finalOptions = ` La longitud del radio es ${radio}`
             }else if(shape.name == "Pirámide"){
                 const altura = Number(valuesFromForm.altura);
                 const lado = Number(valuesFromForm.lado);
                 setVolume(lado)
                 setAltura(altura)
-                finalOptions = ` La altura ${altura} y la base es ${lado} `
+                finalOptions = ` La altura ${altura} y la base es ${lado}`
+            }else if(shape.name == "Cápsula"){
+                const radio = Number(valuesFromForm.radio);
+                const altura = Number(valuesFromForm.lado);
+                setVolume(radio)
+                setAltura(altura)
+                finalOptions = `La altura ${altura} y radio es ${radio}`
             }
             finalPrompt = prompt.replace("{figura}", shape?.name).concat(finalOptions)
             const request = await chatSession.sendMessage(finalPrompt)
             const responseJson = JSON.parse(request.response.text());
-            
             setExplanation(responseJson.explicacion);
         }
     }  
@@ -84,11 +88,11 @@ const MakeCalculations3d = () => {
                 {shape.name === "Cápsula" &&
                 <div 
                 className="w-full flex flex-col gap-2">
-                <label htmlFor="altura" className="w-full">
-                    <input type="text" name="altura" id="altura" placeholder="Ingresa la altura de la pirámide" className="p-2 rounded w-full"/>
+                <label htmlFor="radio" className="w-full">
+                    <input type="text" name="radio" id="radio" placeholder="Ingresa el radio" className="p-2 rounded w-full"/>
                 </label>
                 <label htmlFor="lado" className="w-full">
-                    <input type="text" name="lado" id="lado" placeholder="Ingresa la longitud del lado de la base" className="p-2 rounded w-full"/>
+                    <input type="text" name="lado" id="lado" placeholder="Ingresa la longitud de la altura" className="p-2 rounded w-full"/>
                 </label>
                 </div>
                 }

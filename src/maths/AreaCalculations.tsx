@@ -10,7 +10,7 @@ interface IntegralCalculationProps {
 }
   
 export function AreaCalculations({ shapeType, size, altura }: IntegralCalculationProps) {
-    const { titulo, formula, calculation, result, description } = CalculateArea(shapeType,size,altura);
+    const { titulo, formula, calculation, result, description, aproximateResult } = CalculateArea(shapeType,size,altura);
     return (
       <AnimatePresence mode="wait">
         <motion.div
@@ -47,7 +47,13 @@ export function AreaCalculations({ shapeType, size, altura }: IntegralCalculatio
               </div>
             </AnimatedCard>
             <AnimatedCard delay={0.4}>
-              <h4 className="font-medium text-gray-100 mb-2">Resultado</h4>
+              <h4 className="font-medium text-gray-100 mb-2">Resultado apróximado</h4>
+              <div className="bg-blue-50 p-3 rounded-lg border border-blue-100">
+                <span className="font-mono text-blue-600 font-medium">{aproximateResult}</span>
+              </div>
+            </AnimatedCard>
+            <AnimatedCard delay={0.4}>
+              <h4 className="font-medium text-gray-100 mb-2">Resultado exacto</h4>
               <div className="bg-blue-50 p-3 rounded-lg border border-blue-100">
                 <span className="font-mono text-blue-600 font-medium">{result}</span>
               </div>
